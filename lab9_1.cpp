@@ -3,10 +3,14 @@
 using namespace std;
 
 int main(){	
-	cout << "Enter initial loan: ";
-	cout << "Enter interest rate per year (%): ";
-	cout << "Enter amount you can pay per year: ";
+	double balance,rate,paypyear;
 
+	cout << "Enter initial loan: ";
+	cin >> balance;
+	cout << "Enter interest rate per year (%): ";
+	cin >> rate;
+	cout << "Enter amount you can pay per year: ";
+	cin >> paypyear;
 	//use 'setw' to set width of table and 'left' to set left-alignment
 	//you can change input argument of 'setw()' to see the effect
 	//Try to change from 'left' to 'right' and see the effect
@@ -21,13 +25,31 @@ int main(){
 	//use 'fixed' and 'setprecision' to fix the number of decimal digits for displaying
 	//you can change input argument of 'setprecision()' to see the effect
 	cout << fixed << setprecision(2); 
-	cout << setw(13) << left << 1; 
-	cout << setw(13) << left << 1000.0;
-	cout << setw(13) << left << 50.0;
-	cout << setw(13) << left << 1050.0;
-	cout << setw(13) << left << 100.0;
-	cout << setw(13) << left << 950.0;
-	cout << "\n";	
+
+	int year = 1;
+
+	do{
+		cout << setw(13) << left << year++; 
+		cout << setw(13) << left << balance;
+
+		double interest = balance * rate / 100;
+		balance += interest;
+		cout << setw(13) << left << interest;
+		cout << setw(13) << left << balance;
+
+		if(paypyear > balance){
+			cout << setw(13) << left << balance;
+			balance = 0;
+		}
+		else{
+			cout << setw(13) << left << paypyear;
+			balance -= paypyear;
+		}
+		cout << setw(13) << left << balance;
+		cout << "\n";	
+	} while(balance != 0);
+
+	
 	
 	return 0;
 }
